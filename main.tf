@@ -12,7 +12,7 @@ resource "github_repository_environment" "dev-env" {
   repository          = var.my_repo
   prevent_self_review = true
   reviewers {
-    users = [data.github_user.current.id]
+    users = "1"
   }
   deployment_branch_policy {
     protected_branches     = true
@@ -25,7 +25,7 @@ resource "github_repository_environment" "pprod-env" {
   repository          = var.my_repo
   prevent_self_review = true
   reviewers {
-    users = "Ray-tm"
+    users = "1"
   }
   deployment_branch_policy {
     protected_branches     = true
