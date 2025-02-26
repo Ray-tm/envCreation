@@ -16,6 +16,10 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write  
+
+    env:
+      TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout Repository
@@ -27,11 +31,11 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
-      - name: Plan Terraform Changes
-        run: terraform plan
+      - name: Capture Terraform Plan Output
+        run: terraform plan -no-color > plan.txt
 
       - name: Apply Terraform Changes
-        if: github.ref == 'refs/heads/main' # Only apply on main branch
+        if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
 
       - name: Update PR with Terraform Plan Output
@@ -40,9 +44,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const fs = require('fs');
+            const planOutput = fs.readFileSync('plan.txt', 'utf8');
             const output = `#### Terraform Plan Output
               \`\`\`
-              Plan: Terraform changes have been planned.
+              ${planOutput}
               \`\`\`
               `;
             github.rest.issues.createComment({
