@@ -7,7 +7,7 @@ data "github_user" "current" {
 #   description = "My code repository"
 # }
 
-resource "github_repository_environment" "dev-env" {
+resource "github_repository_environment" "dev" {
   environment         = "dev"
   repository          = var.my_repo
   prevent_self_review = true
@@ -17,7 +17,7 @@ resource "github_repository_environment" "dev-env" {
   }
 }
 
-resource "github_repository_environment" "pprod-env" {
+resource "github_repository_environment" "pprod" {
   environment         = "pprod"
   repository          = var.my_repo
   prevent_self_review = true
