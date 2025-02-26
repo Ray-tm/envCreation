@@ -8,6 +8,5 @@ terraform {
 }
 
 provider "github" {
-  token = var.TF_VAR_github_token
+  token = env("GH_TOKEN")
 }
-
