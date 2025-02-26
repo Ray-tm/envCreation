@@ -8,7 +8,7 @@ data "github_user" "current" {
 # }
 
 resource "github_repository_environment" "dev" {
-  environment         = "dev"
+  environment         = ""
   repository          = "Ray-tm/envCreation"
 #   prevent_self_review = true
 #   deployment_branch_policy {
@@ -18,7 +18,7 @@ resource "github_repository_environment" "dev" {
 }
 
 resource "github_repository_environment" "pprod" {
-  environment         = "pprod"
+  environment         = ""
   repository          = "Ray-tm/envCreation"
 #   prevent_self_review = true
 #   deployment_branch_policy {
