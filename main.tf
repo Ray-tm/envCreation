@@ -9,7 +9,7 @@ data "github_user" "current" {
 
 resource "github_repository_environment" "dev" {
   environment         = "dev"
-  repository          = "https://github.com/Ray-tm/envCreation"
+  repository          = "Ray-tm/envCreation"
 #   prevent_self_review = true
 #   deployment_branch_policy {
 #     protected_branches     = true
@@ -19,7 +19,7 @@ resource "github_repository_environment" "dev" {
 
 resource "github_repository_environment" "pprod" {
   environment         = "pprod"
-  repository          = "https://github.com/Ray-tm/envCreation"
+  repository          = "envCreation"
 #   prevent_self_review = true
 #   deployment_branch_policy {
 #     protected_branches     = true
