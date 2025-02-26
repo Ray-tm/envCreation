@@ -8,5 +8,5 @@ terraform {
 }
 
 provider "github" {
-  token = env("GH_TOKEN")
+  token = env("GITHUB_TOKEN")
 }
