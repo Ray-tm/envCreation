@@ -37,7 +37,7 @@ jobs:
 
 
       - name: Apply Terraform Changes
-        if: github.ref == 'refs/heads/main'
+        # if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
 
       - name: Update PR with Terraform Plan Output
