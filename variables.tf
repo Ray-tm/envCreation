@@ -4,8 +4,3 @@ variable "repo_name" {
   description = "name of the repository"
 }
 
-variable "token" {
-  type        = string
-  
-  description = "github token"
-}
