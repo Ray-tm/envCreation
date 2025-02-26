@@ -1,6 +1,6 @@
-data "github_user" "current" {
-  username = "Ray-tm"
-}
+# data "github_user" "current" {
+#   username = "Ray-tm"
+# }
 
 data "github_repository" "my_repo" {
   full_name = var.repo_name
