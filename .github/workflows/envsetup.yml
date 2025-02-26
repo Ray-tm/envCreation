@@ -32,7 +32,9 @@ jobs:
         run: terraform init
 
       - name: Capture Terraform Plan Output
-        run: terraform plan -no-color > plan.txt
+        run: |
+          terraform plan -no-color -input=false | tee plan.txt
+
 
       - name: Apply Terraform Changes
         if: github.ref == 'refs/heads/main'
