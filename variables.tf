@@ -1,5 +1,5 @@
 variable "my_repo" {
   type        = string
-  default = "envCreation" 
+  default = "Ray-tm/envCreation" 
   description = "name of the repository"
 }
