@@ -8,8 +8,8 @@ data "github_user" "current" {
 # }
 
 resource "github_repository_environment" "dev" {
-  environment         = ""
-  repository          = "Ray-tm/envCreation"
+  environment         = "dev"
+  repository          = "https://github.com/Ray-tm/envCreation"
 #   prevent_self_review = true
 #   deployment_branch_policy {
 #     protected_branches     = true
@@ -18,8 +18,8 @@ resource "github_repository_environment" "dev" {
 }
 
 resource "github_repository_environment" "pprod" {
-  environment         = ""
-  repository          = "Ray-tm/envCreation"
+  environment         = "pprod"
+  repository          = "https://github.com/Ray-tm/envCreation"
 #   prevent_self_review = true
 #   deployment_branch_policy {
 #     protected_branches     = true
