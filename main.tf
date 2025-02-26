@@ -2,14 +2,13 @@ data "github_user" "current" {
   username = "Ray-tm"
 }
 
-# resource "github_repository" "my_repo" {
-#   name        = "envCreation"
-#   description = "My code repository"
-# }
+data "github_repository" "my_repo" {
+  full_name = var.repo_name
+}
 
 resource "github_repository_environment" "dev" {
   environment         = "dev"
-  repository          = "Ray-tm/envCreation"
+  repository          = data.github_repository.my_repo.name
 #   prevent_self_review = true
 #   deployment_branch_policy {
 #     protected_branches     = true
@@ -19,7 +18,7 @@ resource "github_repository_environment" "dev" {
 
 resource "github_repository_environment" "pprod" {
   environment         = "pprod"
-  repository          = "envCreation"
+  repository          = "Ray-tm/envCreation"
 #   prevent_self_review = true
 #   deployment_branch_policy {
 #     protected_branches     = true
