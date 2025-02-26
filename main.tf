@@ -9,7 +9,7 @@ data "github_user" "current" {
 
 resource "github_repository_environment" "dev-env" {
   environment         = "dev"
-  repository          = github_repository.my_repo.id
+  repository          = var.my_repo
   prevent_self_review = true
   reviewers {
     users = [data.github_user.current.id]
@@ -22,7 +22,7 @@ resource "github_repository_environment" "dev-env" {
 
 resource "github_repository_environment" "pprod-env" {
   environment         = "pprod"
-  repository          = github_repository.my_repo.id
+  repository          = var.my_repo
   prevent_self_review = true
   reviewers {
     users = "Ray-tm"
