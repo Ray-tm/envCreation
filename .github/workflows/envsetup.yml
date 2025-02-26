@@ -32,7 +32,7 @@ jobs:
         run: terraform init
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+          TF_VAR_github_token: ${{ GH_TOKEN.GITHUB_TOKEN }}
 
         
           #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,14 +41,14 @@ jobs:
       - name: Capture Terraform Plan Output
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+            TF_VAR_github_token: ${{ secrets.GH_TOKEN }}
         run: |
           terraform plan -no-color -input=false | tee plan.txt
 
       - name: Apply Terraform Changes
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+            TF_VAR_github_token: ${{ secrets.GH_TOKEN }}
         # if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
 
