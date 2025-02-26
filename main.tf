@@ -16,9 +16,9 @@ resource "github_repository_environment" "dev" {
 #   }
 }
 
-resource "github_repository_environment" "pprod" {
+resource "github_repository_environment" "pprod-env" {
   environment         = "pprod"
-  repository          = "Ray-tm/envCreation"
+  repository          = data.github_repository.my_repo.name
 #   prevent_self_review = true
 #   deployment_branch_policy {
 #     protected_branches     = true
