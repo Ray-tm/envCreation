@@ -1,0 +1,61 @@
+name: Set environments
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  terraform:
+    name: "Terraform Plan & Apply"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write  
+
+    env:
+      TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Capture Terraform Plan Output
+        run: |
+          terraform plan -no-color -input=false | tee plan.txt
+
+
+      - name: Apply Terraform Changes
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
+
+      - name: Update PR with Terraform Plan Output
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const planOutput = fs.readFileSync('plan.txt', 'utf8');
+            const output = `#### Terraform Plan Output
+              \`\`\`
+              ${planOutput}
+              \`\`\`
+              `;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });

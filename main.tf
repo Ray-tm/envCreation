@@ -9,11 +9,18 @@ data "github_user" "current" {
 
 resource "github_repository_environment" "dev-env" {
   environment         = "dev"
-  repository          = github_repository.my_repo.name
+  repository          = var.my_repo
   prevent_self_review = true
-  reviewers {
-    users = [data.github_user.current.id]
+  deployment_branch_policy {
+    protected_branches     = true
+    custom_branch_policies = false
   }
+}
+
+resource "github_repository_environment" "pprod-env" {
+  environment         = "pprod"
+  repository          = var.my_repo
+  prevent_self_review = true
   deployment_branch_policy {
     protected_branches     = true
     custom_branch_policies = false
