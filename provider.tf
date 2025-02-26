@@ -7,6 +7,6 @@ terraform {
   }
 }
 
-provider "github" {
-  token = env("GITHUB_TOKEN")
-}
+# provider "github" {
+#   token = env("GITHUB_TOKEN")
+# }
