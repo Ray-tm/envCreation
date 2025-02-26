@@ -1,4 +1,5 @@
 variable "my_repo" {
   type        = string
-  description = "envCreation"
+  default = "envCreation" 
+  description = "name of the repository"
 }
