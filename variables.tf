@@ -4,7 +4,7 @@ variable "repo_name" {
   description = "name of the repository"
 }
 
-variable "github_token" {
+variable "TF_VAR_github_token" {
   type        = string
   
   description = "github token"
