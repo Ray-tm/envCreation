@@ -36,4 +36,12 @@ resource "github_repository_environment" "build-env" {
 #   }
 }
 
-
+resource "github_repository_environment" "prod-env" {
+  environment         = "build"
+  repository          = data.github_repository.my_repo.name
+   prevent_self_review = true
+   deployment_branch_policy {
+     protected_branches     = true
+     custom_branch_policies = false
+   }
+}
